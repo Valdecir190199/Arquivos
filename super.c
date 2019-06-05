@@ -158,17 +158,16 @@ void alterar_cliente()
 	cin >> codigo;
 
 	arquivo = abrir_arquivo("cliente.dat");
-
 	while(fread(&cliente, sizeof(Cliente), 1, arquivo)){
 		if(cliente.codigo == codigo){
+			fseek(arquivo, sizeof(Cliente) * -1 , SEEK_CUR);
+
 			cout << "Digite o novo nome" << endl;
 			cin >> cliente.nome;
 
-			fseek(arquivo, sizeof(Cliente), SEEK_SET);
+
 			fwrite(&cliente, sizeof(Cliente), 1, arquivo);
-
 		}
-
 	}
 	fclose(arquivo);
 
@@ -177,6 +176,8 @@ void alterar_cliente()
 int main ()
 {
 	listar_cliente();
+	inserirCliente();
+	inserirCliente();
 	inserirCliente();
 	inserirCliente();
 	listar_cliente();
